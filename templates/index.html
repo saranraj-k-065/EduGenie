@@ -1,0 +1,1059 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8ff">
+
+  <title>EduGenie | AI Learning Assistant</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #6c4cf1;
+      --primary-dark: #5033d5;
+      --blue: #4385f5;
+      --text: #19213d;
+      --muted: #78819d;
+      --border: #e8eaf5;
+      --surface: #ffffff;
+      --bg: #f7f8ff;
+      --shadow: 0 12px 40px rgba(64, 75, 150, .08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(ellipse at 10% 0%, #e9e7ff 0%, transparent 38%),
+        radial-gradient(ellipse at 95% 10%, #e1f2ff 0%, transparent 35%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    button, select, textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .navbar {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      background: rgba(255,255,255,.85);
+      border-bottom: 1px solid rgba(225,228,244,.8);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .brand-icon {
+      width: 43px;
+      height: 43px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 25px;
+      background: linear-gradient(135deg, var(--primary), #37b9f5);
+      box-shadow: 0 6px 18px #7862ee40;
+    }
+
+    .brand span {
+      color: var(--primary);
+    }
+
+    .nav-tag {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .nav-tag span {
+      color: var(--primary);
+      margin: 0 9px;
+    }
+
+    .container {
+      width: min(1250px, 90%);
+      margin: auto;
+    }
+
+    .hero {
+      padding: 65px 0 45px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 35px;
+    }
+
+    .hero-content {
+      max-width: 760px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary);
+      background: #eeebff;
+      border: 1px solid #e0d9ff;
+      padding: 9px 15px;
+      border-radius: 30px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      margin-bottom: 23px;
+    }
+
+    .hero h1 {
+      font-size: clamp(35px, 5vw, 58px);
+      line-height: 1.13;
+      letter-spacing: -2.4px;
+      margin-bottom: 22px;
+      font-weight: 800;
+    }
+
+    .gradient-text {
+      background: linear-gradient(100deg, var(--primary), #338af5);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.9;
+      max-width: 620px;
+    }
+
+    .hero-art {
+      width: 190px;
+      height: 190px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      font-size: 100px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #e6e0ff, #d9f2ff);
+      box-shadow: inset 0 0 0 12px #ffffff80,
+                  0 15px 40px #8c7cf126;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 0 0 38px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,.75);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      color: #56607e;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px #7c83b008;
+    }
+
+    .feature-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      font-size: 17px;
+      background: #eeebff;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid #e9e9f7;
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+
+    .card-heading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .heading-icon {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #eeeaff, #e6f2ff);
+      font-size: 21px;
+    }
+
+    .card-heading h2 {
+      font-size: 19px;
+      font-weight: 750;
+      letter-spacing: -.5px;
+    }
+
+    .card-heading p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 11px;
+      color: #454e6c;
+    }
+
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 9px;
+      margin-bottom: 26px;
+    }
+
+    .task-btn {
+      min-height: 90px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: #fafbff;
+      color: #5d6684;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 650;
+      transition: .2s ease;
+      padding: 10px 4px;
+    }
+
+    .task-btn .task-icon {
+      font-size: 24px;
+    }
+
+    .task-btn:hover {
+      border-color: #c7bbff;
+      background: #f4f1ff;
+      transform: translateY(-2px);
+    }
+
+    .task-btn.active {
+      color: white;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--primary), var(--blue));
+      box-shadow: 0 7px 18px #7154ed40;
+    }
+
+    .level-select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: #fafbff;
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+      margin-bottom: 24px;
+      cursor: pointer;
+    }
+
+    .level-select:focus,
+    textarea:focus {
+      border-color: #8d79f6;
+      box-shadow: 0 0 0 4px #765cf114;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 190px;
+      resize: vertical;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text);
+      background: #fcfcff;
+      outline: none;
+      transition: .2s ease;
+    }
+
+    textarea::placeholder {
+      color: #a1a8bd;
+    }
+
+    .input-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .tip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f3f0ff;
+      color: #6952cb;
+      padding: 13px 15px;
+      border-radius: 13px;
+      font-size: 12px;
+      margin: 20px 0;
+      line-height: 1.6;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: 0;
+      padding: 17px 22px;
+      border-radius: 15px;
+      background: linear-gradient(100deg, var(--primary), #398cf4);
+      color: white;
+      font-size: 15px;
+      font-weight: 750;
+      box-shadow: 0 7px 20px #7154ed35;
+      transition: .2s ease;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px #7154ed45;
+    }
+
+    .submit-btn:disabled {
+      opacity: .7;
+      cursor: wait;
+    }
+
+    /* Response panel */
+
+    .result-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 600px;
+    }
+
+    .result-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 23px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .result-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .result-title h2 {
+      font-size: 18px;
+    }
+
+    .status {
+      font-size: 11px;
+      font-weight: 700;
+      color: #16a36a;
+      background: #e9fbf3;
+      padding: 6px 10px;
+      border-radius: 20px;
+      margin-top: 6px;
+      display: inline-block;
+    }
+
+    .secondary-btn {
+      border: 1px solid #e0dafa;
+      background: #f8f6ff;
+      color: var(--primary);
+      padding: 10px 15px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .secondary-btn:hover {
+      background: #eeeaff;
+    }
+
+    .result-content {
+      flex: 1;
+      padding: 25px 0;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .empty-state {
+      min-height: 450px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 25px;
+    }
+
+    .empty-icon {
+      width: 100px;
+      height: 100px;
+      display: grid;
+      place-items: center;
+      font-size: 48px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #eeeaff, #e6f6ff);
+      margin-bottom: 25px;
+    }
+
+    .empty-state h3 {
+      font-size: 19px;
+      margin-bottom: 12px;
+    }
+
+    .empty-state p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 13px;
+      max-width: 280px;
+    }
+
+    .plain-response {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 1.9;
+      color: #454e6c;
+    }
+
+    .loading {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px;
+      border-radius: 15px;
+      background: #f6f4ff;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 3px solid #dcd4ff;
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .footer {
+      margin: 50px 0 25px;
+    }
+
+    .footer-features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      padding: 25px 0;
+      border-top: 1px solid #e4e7f3;
+      border-bottom: 1px solid #e4e7f3;
+    }
+
+    .footer-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .footer-item .emoji {
+      font-size: 23px;
+    }
+
+    .footer-item strong {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+
+    .footer-item small {
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .disclaimer {
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.7;
+      color: var(--muted);
+      padding-top: 23px;
+    }
+
+    @media (max-width: 950px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-art {
+        width: 140px;
+        height: 140px;
+        font-size: 75px;
+      }
+
+      .result-card {
+        min-height: 420px;
+      }
+
+      .empty-state {
+        min-height: 300px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        height: 65px;
+        padding: 0 5%;
+      }
+
+      .brand {
+        font-size: 21px;
+      }
+
+      .brand-icon {
+        width: 37px;
+        height: 37px;
+      }
+
+      .nav-tag {
+        display: none;
+      }
+
+      .container {
+        width: 92%;
+      }
+
+      .hero {
+        padding: 42px 0 30px;
+      }
+
+      .hero-art {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 37px;
+        letter-spacing: -1.5px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+
+      .features {
+        gap: 8px;
+        margin-bottom: 25px;
+      }
+
+      .feature {
+        padding: 9px 11px;
+        font-size: 11px;
+      }
+
+      .feature-icon {
+        width: 29px;
+        height: 29px;
+      }
+
+      .card {
+        padding: 20px;
+        border-radius: 20px;
+      }
+
+      .task-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .task-btn {
+        min-height: 78px;
+      }
+
+      textarea {
+        min-height: 160px;
+      }
+
+      .footer-features {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 25px;
+      }
+
+      .footer-item {
+        justify-content: flex-start;
+      }
+
+      .result-top {
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="brand">
+      <div class="brand-icon">✦</div>
+      <div>Edu<span>Genie</span></div>
+    </div>
+    <div class="nav-tag">
+      LEARN <span>•</span> GROW <span>•</span> ACHIEVE
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <header class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">✦ YOUR PERSONAL AI STUDY PARTNER</div>
+
+        <h1>
+          Learn anything with
+          <span class="gradient-text">EduGenie</span>
+        </h1>
+
+        <p>
+          Ask questions, simplify concepts, create quizzes,
+          summarize notes, and plan your learning journey.
+          Your personal AI study partner is here to help.
+        </p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">🤖</div>
+    </header>
+
+    <section class="features">
+      <div class="feature">
+        <div class="feature-icon">💡</div>
+        Explain concepts
+      </div>
+      <div class="feature">
+        <div class="feature-icon">💬</div>
+        Ask questions
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📝</div>
+        Create quizzes
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📚</div>
+        Summarize notes
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎯</div>
+        Plan learning
+      </div>
+    </section>
+
+    <section class="workspace">
+
+      <!-- INPUT CARD -->
+      <div class="card">
+        <div class="card-heading">
+          <div class="heading-icon">✨</div>
+          <div>
+            <h2>Choose Your Task</h2>
+            <p>What would you like to learn today?</p>
+          </div>
+        </div>
+
+        <form id="study-form">
+
+          <label class="field-label">Select a learning activity</label>
+
+          <div class="task-grid" id="task-grid">
+            <button class="task-btn active" type="button" data-task="explain">
+              <span class="task-icon">💡</span>
+              Explain
+            </button>
+            <button class="task-btn" type="button" data-task="qa">
+              <span class="task-icon">💬</span>
+              Q&amp;A
+            </button>
+            <button class="task-btn" type="button" data-task="quiz">
+              <span class="task-icon">📝</span>
+              Quiz
+            </button>
+            <button class="task-btn" type="button" data-task="summarize">
+              <span class="task-icon">📖</span>
+              Summary
+            </button>
+            <button class="task-btn" type="button" data-task="learn">
+              <span class="task-icon">🎓</span>
+              Learn
+            </button>
+          </div>
+
+          <!-- Hidden task field preserves the existing API payload -->
+          <input type="hidden" id="task" name="task" value="explain">
+
+          <label class="field-label" for="level">
+            ✦ Learning Level
+          </label>
+
+          <select id="level" name="level" class="level-select">
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+
+          <label class="field-label" for="text" id="input-label">
+            ✎ Enter a concept or topic
+          </label>
+
+          <textarea
+            id="text"
+            name="text"
+            rows="7"
+            maxlength="20000"
+            placeholder="For example: Explain the water cycle using a simple analogy..."
+            required
+          ></textarea>
+
+          <div class="input-meta">
+            <span>✦ Be specific for better results</span>
+            <span id="char-count">0 / 20,000</span>
+          </div>
+
+          <div class="tip">
+            <span>💡</span>
+            <span id="tip-text">
+              Tip: Tell EduGenie your topic and what you want to understand.
+            </span>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submit-btn">
+            ✨ &nbsp; Generate Response &nbsp; →
+          </button>
+        </form>
+      </div>
+
+      <!-- RESPONSE CARD -->
+      <div class="card result-card" id="result-card" aria-live="polite">
+        <div class="result-top">
+          <div class="result-title">
+            <div class="heading-icon">✦</div>
+            <div>
+              <h2 id="result-title">EduGenie Response</h2>
+              <span class="status" id="result-status">● Ready to learn</span>
+            </div>
+          </div>
+
+          <button id="copy-btn" class="secondary-btn" type="button">
+            ▢ Copy
+          </button>
+        </div>
+
+        <div id="result" class="result-content">
+          <div class="empty-state">
+            <div class="empty-icon">📄</div>
+            <h3>Your result will appear here</h3>
+            <p>
+              Choose a task, enter your topic, and let
+              EduGenie help you learn something new.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="footer">
+      <div class="footer-features">
+        <div class="footer-item">
+          <span class="emoji">🛡️</span>
+          <div>
+            <strong>Safe &amp; Secure</strong>
+            <small>Your data stays private.</small>
+          </div>
+        </div>
+
+        <div class="footer-item">
+          <span class="emoji">⚡</span>
+          <div>
+            <strong>Powered by Gemini</strong>
+            <small>AI-powered learning support.</small>
+          </div>
+        </div>
+
+        <div class="footer-item">
+          <span class="emoji">💜</span>
+          <div>
+            <strong>Built for Learners</strong>
+            <small>From curiosity to confidence.</small>
+          </div>
+        </div>
+
+        <div class="footer-item">
+          <span class="emoji">🌱</span>
+          <div>
+            <strong>Keep Improving</strong>
+            <small>Learn something every day.</small>
+          </div>
+        </div>
+      </div>
+
+      <p class="disclaimer">
+        ✦ AI can make mistakes. Verify important academic information
+        with trusted learning materials.
+      </p>
+    </footer>
+  </main>
+
+  <script>
+    const form = document.querySelector("#study-form");
+    const task = document.querySelector("#task");
+    const input = document.querySelector("#text");
+    const label = document.querySelector("#input-label");
+    const count = document.querySelector("#char-count");
+    const button = document.querySelector("#submit-btn");
+    const result = document.querySelector("#result");
+    const resultTitle = document.querySelector("#result-title");
+    const resultStatus = document.querySelector("#result-status");
+    const copyBtn = document.querySelector("#copy-btn");
+
+    const titles = {
+      explain: "Concept Explanation",
+      qa: "Answer",
+      quiz: "Practice Quiz",
+      summarize: "Summary",
+      learn: "Your Learning Roadmap"
+    };
+
+    const prompts = {
+      explain: "Enter a concept or topic",
+      qa: "Ask your question",
+      quiz: "Paste a passage or enter a topic",
+      summarize: "Paste the text you want summarized",
+      learn: "What topic would you like to learn?"
+    };
+
+    const placeholders = {
+      explain: "For example: Explain machine learning with a simple analogy...",
+      qa: "For example: What is the difference between AI and machine learning?",
+      quiz: "Paste your study material or enter a topic for a quiz...",
+      summarize: "Paste your notes or study material here...",
+      learn: "For example: Create a 30-day learning path for Python..."
+    };
+
+    const tips = {
+      explain: "Tip: Ask for examples or analogies to understand difficult concepts.",
+      qa: "Tip: Ask a clear question for a focused answer.",
+      quiz: "Tip: Paste a passage to generate questions based on your material.",
+      summarize: "Tip: Shorter, focused passages make summarization easier.",
+      learn: "Tip: Include your goal and available study time for a more useful roadmap."
+    };
+
+    // Switch tasks using the attractive task buttons.
+    document.querySelectorAll(".task-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".task-btn").forEach(item => {
+          item.classList.remove("active");
+        });
+
+        btn.classList.add("active");
+        task.value = btn.dataset.task;
+
+        label.textContent = "✎ " + prompts[task.value];
+        input.placeholder = placeholders[task.value];
+        document.querySelector("#tip-text").textContent = tips[task.value];
+
+        resultTitle.textContent = titles[task.value];
+      });
+    });
+
+    input.addEventListener("input", () => {
+      count.textContent =
+        `${input.value.length.toLocaleString()} / 20,000`;
+    });
+
+    // Safely display Gemini's response as plain text.
+    function renderText(text) {
+      const pre = document.createElement("pre");
+      pre.className = "plain-response";
+
+      pre.textContent = typeof text === "string"
+        ? text
+        : JSON.stringify(text, null, 2);
+
+      result.replaceChildren(pre);
+    }
+
+    function showLoading() {
+      const loading = document.createElement("div");
+      loading.className = "loading";
+
+      const spinner = document.createElement("div");
+      spinner.className = "spinner";
+
+      const message = document.createElement("span");
+      message.textContent = "EduGenie is preparing your response...";
+
+      loading.append(spinner, message);
+      result.replaceChildren(loading);
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const content = input.value.trim();
+
+      if (!content) {
+        input.focus();
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = "⏳ Generating response...";
+
+      resultTitle.textContent = titles[task.value];
+      resultStatus.textContent = "● Generating";
+      resultStatus.style.color = "#a07815";
+      resultStatus.style.background = "#fff7df";
+
+      showLoading();
+
+      try {
+        const response = await fetch("/api/task", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            task: task.value,
+            text: content,
+            level: document.querySelector("#level").value
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            data.detail || "Request failed. Please try again."
+          );
+        }
+
+        renderText(data.result);
+
+        resultStatus.textContent = "● Response ready";
+        resultStatus.style.color = "#16a36a";
+        resultStatus.style.background = "#e9fbf3";
+
+      } catch (error) {
+        renderText(
+          "Sorry, something went wrong: " + error.message +
+          "\n\nCheck that the server is running and your Gemini API key is configured."
+        );
+
+        resultStatus.textContent = "● Request failed";
+        resultStatus.style.color = "#c24141";
+        resultStatus.style.background = "#fff0f0";
+
+      } finally {
+        button.disabled = false;
+        button.innerHTML = "✨ &nbsp; Generate Response &nbsp; →";
+      }
+    });
+
+    copyBtn.addEventListener("click", async () => {
+      const text = result.innerText.trim();
+
+      if (!text) return;
+
+      try {
+        await navigator.clipboard.writeText(text);
+        copyBtn.textContent = "✓ Copied!";
+
+        setTimeout(() => {
+          copyBtn.textContent = "▢ Copy";
+        }, 1500);
+
+      } catch {
+        copyBtn.textContent = "Copy unavailable";
+
+        setTimeout(() => {
+          copyBtn.textContent = "▢ Copy";
+        }, 1500);
+      }
+    });
+  </script>
+</body>
+</html>
