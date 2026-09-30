@@ -20,7 +20,7 @@
 
 ---
 
-## Step 1: Brainstorm and Idea Listing
+## Step 2: Requirement Analysis
 
 | S.No | Team Member | Idea / Suggestion | Category | Group No. |
 |------|-------------|-------------------|----------|-----------|
