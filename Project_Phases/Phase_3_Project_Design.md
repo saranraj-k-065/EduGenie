@@ -23,7 +23,7 @@
 
 ---
 
-## Step 1: Brainstorm and Idea Listing
+## Step 3: Project Design
 
 | S.No | Team Member | Idea / Suggestion | Category | Group No. |
 |------|-------------|-------------------|----------|-----------|
