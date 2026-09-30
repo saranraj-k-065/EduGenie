@@ -21,7 +21,7 @@
 
 ---
 
-## Step 1: Brainstorm and Idea Listing
+## Step 4:  Project Planning
 
 | S.No | Team Member | Idea / Suggestion | Category | Group No. |
 |------|-------------|-------------------|----------|-----------|
