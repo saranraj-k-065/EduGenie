@@ -16,7 +16,7 @@
 
 ---
 
-## Step 1: Brainstorm and Idea Listing
+## Step5: Project Development
 
 | S.No | Team Member | Idea / Suggestion | Category | Group No. |
 |------|-------------|-------------------|----------|-----------|
