@@ -16,7 +16,7 @@
 
 ---
 
-## Step 1: Brainstorm and Idea Listing
+## Step 7: Project Documentation
 
 | S.No | Team Member | Idea / Suggestion | Category | Group No. |
 |------|-------------|-------------------|----------|-----------|
