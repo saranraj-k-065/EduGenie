@@ -15,8 +15,7 @@
 
 ---
 
-## Step 1: Brainstorm and Idea Listing
-
+## Step 6: Project Testing
 | S.No | Team Member | Idea / Suggestion | Category | Group No. |
 |------|-------------|-------------------|----------|-----------|
 | 1 |Saranraj K | Multimodal receipt image parsing using Google Gemini 1.5 Flash API | AI Architecture & Vision | Group 10 |
